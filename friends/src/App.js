@@ -6,6 +6,7 @@ import FriendsList from './components/FriendsList';
 import PrivateRoute from './components/PrivateRoute';
 import AddFriend from './components/AddFriend';
 import Home from './components/Home';
+import EditFriend from './components/EditFriend';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path='/' component={Home} />
         <PrivateRoute exact path="/friends" component={FriendsList} />
         <PrivateRoute exact path="/friends" component={AddFriend} />
+        <PrivateRoute exact path="/friends/:id" component={EditFriend} />
         <Route path="/login" component={Login} />
       </Switch>
     </div>
