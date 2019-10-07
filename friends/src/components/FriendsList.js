@@ -27,6 +27,14 @@ const FriendsList = () => {
     setDisplay(!display)
   }
 
+  const onDelete = (e, id) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .delete(`/friends/${id}`, id)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  }
+
   return (
     <div>
       { 
@@ -41,6 +49,7 @@ const FriendsList = () => {
             <p>Friend: {friend.age}</p>
             <p>Friend: {friend.email}</p>
             <Link to={`/friends/${friend.id}`}><button>Edit</button></Link>
+            <button onClick={(e) => onDelete(e, friend.id)}>Delete</button>
           </div>
         )}
       </div>
