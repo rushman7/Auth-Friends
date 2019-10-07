@@ -1,21 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../utils/axiosAuth';
+import AddFriend from './AddFriend';
 
-const FriendsList = props => {
-  const [friends, setFriends] = useState({ friendList: [] })
+const FriendsList = () => {
+  const [friends, setFriends] = useState([])
+  const [display, setDisplay] = useState(false);
 
-  const getData = () => {
+  useEffect(() => {
     axiosWithAuth()
       .get('/friends')
-      .then(res => setFriends({ friendList: res.data }))
+      .then(res => setFriends(res.data))
       .catch(err => console.log(err))
+  }, [display])
+
+  const onAddFriend = (e, data) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('/friends', data)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+    setDisplay(!display)
+  };
+
+  const onChangeDisplay = () => {
+    setDisplay(!display)
   }
 
   return (
     <div>
-      <button onClick={getData}>Retrieve your Friends!</button>
+      { 
+        display 
+        ? <AddFriend display={display} onAddFriend={onAddFriend} />
+        : <button onClick={() => onChangeDisplay()}>Add a friend!</button>
+      }
       <div className="friend-list-cont">
-        {friends.friendList.map(friend => 
+        {friends.map(friend => 
           <div className="friend-cont" key={friend.id}>
             <p>Friend: {friend.name}</p>
             <p>Friend: {friend.age}</p>
