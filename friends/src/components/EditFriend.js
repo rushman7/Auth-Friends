@@ -14,7 +14,7 @@ const EditFriend = props => {
       .get(`/friends/${id}`)
       .then(res => setEditFriend(res.data))
       .catch(err => console.log(err))
-  }, [])
+  }, [props.match.params.id])
 
   const handleChange = e => {
     setEditFriend({
