@@ -33,3 +33,18 @@ code {
   flex-flow: column nowrap;
   align-items: center;
 }
+
+.friend-list-cont {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto;
+}
+
+.friend-cont {
+  border: 1px solid white;
+  width: 40%;
+  font-size: 1.3rem;
+  margin: 1rem;
+}
