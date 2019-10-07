@@ -1,23 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Link, Route, Switch } from 'react-router-dom';
+
+import Login from './components/Login';
+import GasPrices from './components/GasPrices';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>Auth Friends</h2>
+      <Link to="/login"><button>Login</button></Link>
+      <Link to="/protected"><button>Protected Page</button></Link>
+      <Switch>
+        <Route exact path="/protected" component={GasPrices} />
+        <Route path="/login" component={Login} />
+        <Route component={Login} />
+      </Switch>
     </div>
   );
 }
