@@ -27,3 +27,9 @@ code {
 .App h2 {
   font-size: 3rem;
 }
+
+.login-form {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
