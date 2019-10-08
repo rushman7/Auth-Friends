@@ -19,6 +19,7 @@ class App extends Component {
     return (
     <div className="App">
       <h2>Auth Friends</h2>
+      {this.props.error ? <h3>Error Fetching Friends</h3> : null}
       <Switch>
         <Route exact path='/' component={Home} />
         <PrivateRoute exact path="/friends" component={FriendsList} />
