@@ -13,6 +13,9 @@ export const POST_SUCCESS = 'POST_SUCCESS';
 export const UPDATING_START = 'UPDATING_START';
 export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
 
+export const DELETING_START = 'DELETING_START';
+export const DELETE_SUCCESS = 'DELETE_SUCCESS';
+
 
 export const getFriends = () => dispatch => {
   dispatch({ type: GETTING_START });
@@ -58,6 +61,20 @@ export const updateFriend = (friend, id) => dispatch => {
     .then(res => {
       console.log(res)
       dispatch({ type: UPDATE_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: ERROR, payload: err })
+    })
+}
+
+export const deleteFriend = (friend) => dispatch => {
+  console.log(friend)
+  dispatch({ type: DELETING_START });
+  axiosWithAuth()
+    .delete(`/friends/${friend.id}`, friend)
+    .then(res => {
+      console.log(res)
+      dispatch({ type: DELETE_SUCCESS, payload: res.data })
     })
     .catch(err => {
       dispatch({ type: ERROR, payload: err })

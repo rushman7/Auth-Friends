@@ -3,7 +3,7 @@ import { axiosWithAuth } from '../utils/axiosAuth';
 import { connect } from 'react-redux'
 import AddFriend from './AddFriend';
 import { Link } from 'react-router-dom';
-import { getFriend } from '../actions';
+import { getFriend, deleteFriend } from '../actions';
 
 const FriendsList = props => {
   const [display, setDisplay] = useState(false);
@@ -12,12 +12,9 @@ const FriendsList = props => {
     setDisplay(!display)
   }
 
-  const onDelete = (e, id) => {
+  const onDelete = (e, friend) => {
     e.preventDefault();
-    axiosWithAuth()
-      .delete(`/friends/${id}`, id)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    props.deleteFriend(friend)
   }
 
   const check = () => {
@@ -43,10 +40,10 @@ const FriendsList = props => {
                 <p>Friend: {friend.email}</p>
                 <Link 
                   to={`/friends/${friend.id}`} 
-                  onClick={() => props.getFriend(friend.id)}>
+                  onClick={() => props.getFriend(friend)}>
                   <button>Edit</button>
                 </Link>
-                <button onClick={(e) => onDelete(e, friend.id)}>Delete</button>
+                <button onClick={(e) => onDelete(e, friend)}>Delete</button>
               </div>
             )   
         }
@@ -63,4 +60,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getFriend })(FriendsList);
+export default connect(mapStateToProps, { getFriend, deleteFriend })(FriendsList);
