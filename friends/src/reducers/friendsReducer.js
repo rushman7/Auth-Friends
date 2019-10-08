@@ -1,47 +1,67 @@
-import {
-  ERROR,
-  GETTING_START,
-  GET_SUCCESS,
-  POSTING_START,
-  POST_SUCCESS
-} from '../actions';
+import * as actionTypes from '../actions';
 
 const initialState = {
   friends: [],
   display: false,
   error: '',
-  isFetching: false
+  isFetching: false,
+  friend: {}
 }
 
 export const friendsReducer = (state = initialState, action) => {
   switch(action.type) {
-    case GETTING_START:
+    case actionTypes.GETTING_START:
       return {
         ...state,
         error: '',
         isFetching: true
       }
-    case GET_SUCCESS:
+    case actionTypes.GET_SUCCESS:
       return {
         ...state,
         error: '',
         isFetching: false,
         friends: action.payload
       }
-    case POSTING_START:
+    case actionTypes.GETTING_SINGLE_START:
       return {
         ...state,
         error: '',
         isFetching: true
       }
-    case POST_SUCCESS:
+    case actionTypes.GET_SINGLE_SUCCESS:
+      return {
+        ...state,
+        error: '',
+        isFetching: false,
+        friend: action.payload
+      }
+    case actionTypes.POSTING_START:
+      return {
+        ...state,
+        error: '',
+        isFetching: true
+      }
+    case actionTypes.POST_SUCCESS:
       return {
         ...state,
         error: '',
         isFetching: false,
         friends: action.payload
       }
-    case ERROR:
+    case actionTypes.UPDATING_START:
+      return {
+        ...state,
+        error: '',
+        isFetching: true
+      }
+    case actionTypes.UPDATE_SUCCESS:
+      return {
+        ...state,
+        error: '',
+        isFetching: false
+      }
+    case actionTypes.ERROR:
       return {
         ...state,
         error: action.payload,

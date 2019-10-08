@@ -1,40 +1,34 @@
-import React,{ useState, useEffect } from 'react';
-import { axiosWithAuth } from '../utils/axiosAuth';
+import React,{ useState } from 'react';
+import { updateFriend } from '../actions';
+import { connect } from 'react-redux';
 
-const EditFriend = props => {
+const EditFriend = (props) => {
+  const id = props.match.params.id;
   const [editFriend, setEditFriend] = useState({
-    name: '',
+    name: 'name',
     age: 0,
-    email: '',
+    email: 'email',
+    id: id
   })
 
-  useEffect(() => {
-    const id = props.match.params.id
-    axiosWithAuth()
-      .get(`/friends/${id}`)
-      .then(res => setEditFriend(res.data))
-      .catch(err => console.log(err))
-  }, [props.match.params.id])
-
-  const handleChange = e => {
-    setEditFriend({
-      ...editFriend,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const onEditFriend = data => {
-    const id = props.match.params.id
-    axiosWithAuth()
-      .put(`/friends/${id}`, data)
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
-    props.history.push('/friends')
+  const check = () => {
+    console.log(editFriend)
   }
 
+  const handleChange = e => {
+    setEditFriend({ ...editFriend, [e.target.name]: e.target.value });
+  };
+
+  const onEditFriend = e => {
+    e.preventDefault();
+    props.updateFriend(editFriend, id)
+    props.history.push('/friends')
+  }
+  
   return (
     <div>
-      <form onSubmit={() => onEditFriend(editFriend)} className="login-form">
+      <button onClick={check}>Check?</button>
+      <form onSubmit={onEditFriend} className="login-form">
         <input 
           type="text"
           name="name"
@@ -62,4 +56,11 @@ const EditFriend = props => {
   )
 }
 
-export default EditFriend;
+const mapStateToProps = state => {
+  const { friendsReducer } = state;
+  return {
+    friend: friendsReducer.friend
+  }
+}
+
+export default connect(mapStateToProps, { updateFriend })(EditFriend);
