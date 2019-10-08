@@ -5,21 +5,7 @@ import AddFriend from './AddFriend';
 import { Link } from 'react-router-dom';
 
 const FriendsList = props => {
-  const [friends, setFriends] = useState([])
   const [display, setDisplay] = useState(false);
-
-  useEffect(() => {
-
-  }, [])
-
-  const onAddFriend = (e, data) => {
-    e.preventDefault();
-    axiosWithAuth()
-      .post('/friends', data)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-    setDisplay(!display)
-  };
 
   const onChangeDisplay = () => {
     setDisplay(!display)
@@ -42,7 +28,7 @@ const FriendsList = props => {
       <button onClick={check}>Check?</button>
       { 
         display 
-        ? <AddFriend display={display} onAddFriend={onAddFriend} />
+        ? <AddFriend display={display}/>
         : <button onClick={() => onChangeDisplay()}>Add a friend!</button>
       }
       <div className="friend-list-cont">

@@ -1,7 +1,9 @@
 import {
-  FRIENDS_START,
-  FRIENDS_SUCCESS,
-  FRIENDS_FAILURE
+  ERROR,
+  GETTING_START,
+  GET_SUCCESS,
+  POSTING_START,
+  POST_SUCCESS
 } from '../actions';
 
 const initialState = {
@@ -13,20 +15,33 @@ const initialState = {
 
 export const friendsReducer = (state = initialState, action) => {
   switch(action.type) {
-    case FRIENDS_START:
+    case GETTING_START:
       return {
         ...state,
         error: '',
         isFetching: true
       }
-    case FRIENDS_SUCCESS:
+    case GET_SUCCESS:
       return {
         ...state,
         error: '',
         isFetching: false,
         friends: action.payload
       }
-    case FRIENDS_FAILURE:
+    case POSTING_START:
+      return {
+        ...state,
+        error: '',
+        isFetching: true
+      }
+    case POST_SUCCESS:
+      return {
+        ...state,
+        error: '',
+        isFetching: false,
+        friends: action.payload
+      }
+    case ERROR:
       return {
         ...state,
         error: action.payload,

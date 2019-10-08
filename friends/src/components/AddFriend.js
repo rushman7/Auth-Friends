@@ -1,4 +1,6 @@
 import React,{ useState } from 'react';
+import { connect } from 'react-redux';
+import { addFriend } from '../actions';
 
 const AddFriend = props => {
   const initialState = {
@@ -7,36 +9,43 @@ const AddFriend = props => {
     email: '',
   }
 
-  const [addFriend, setAddFriend] = useState(initialState)
+  const [friend, setFriend] = useState(initialState)
+
+  const addFriend = e => {
+    e.preventDefault();
+    console.log(friend)
+    props.addFriend(friend)
+    setFriend(initialState)
+  }
 
   const handleChange = e => {
-    setAddFriend({
-      ...addFriend,
+    setFriend({
+      ...friend,
       [e.target.name]: e.target.value
     });
   };
 
   return (
     <div>
-      <form onSubmit={(e) => props.onAddFriend(e, addFriend)} className="login-form">
+      <form onSubmit={addFriend} className="login-form">
         <input 
           type="text"
           name="name"
-          value={addFriend.name}
+          value={friend.name}
           onChange={handleChange}
           placeholder="name..."
         />
         <input 
           type="age"
           name="age"
-          value={addFriend.age}
+          value={friend.age}
           onChange={handleChange}
           placeholder="age..."
         />
         <input 
           type="email"
           name="email"
-          value={addFriend.email}
+          value={friend.email}
           onChange={handleChange}
           placeholder="email..."
         />
@@ -46,4 +55,8 @@ const AddFriend = props => {
   )
 }
 
-export default AddFriend;
+const mapStateToProps = state => ({
+
+})
+
+export default connect(mapStateToProps, { addFriend })(AddFriend);
