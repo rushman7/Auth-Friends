@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { axiosWithAuth } from '../utils/axiosAuth';
 import { connect } from 'react-redux'
 import AddFriend from './AddFriend';
 import { Link } from 'react-router-dom';
@@ -35,12 +34,12 @@ const FriendsList = props => {
           ?  <p>Loading friends...</p>
           :  props.friends.map(friend => 
               <div className="friend-cont" key={friend.id}>
-                <p>Friend: {friend.name}</p>
-                <p>Friend: {friend.age}</p>
-                <p>Friend: {friend.email}</p>
+                <p>Name: {friend.name}</p>
+                <p>Age: {friend.age}</p>
+                <p>Email: {friend.email}</p>
                 <Link 
                   to={`/friends/${friend.id}`} 
-                  onClick={() => props.getFriend(friend)}>
+                  onClick={() => props.getFriend(friend.id)}>
                   <button>Edit</button>
                 </Link>
                 <button onClick={(e) => onDelete(e, friend)}>Delete</button>

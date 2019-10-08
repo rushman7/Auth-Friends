@@ -12,7 +12,7 @@ const EditFriend = (props) => {
   })
 
   const check = () => {
-    console.log(editFriend)
+    console.log(props)
   }
 
   const handleChange = e => {

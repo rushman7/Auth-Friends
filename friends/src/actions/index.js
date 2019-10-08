@@ -68,12 +68,10 @@ export const updateFriend = (friend, id) => dispatch => {
 }
 
 export const deleteFriend = (friend) => dispatch => {
-  console.log(friend)
   dispatch({ type: DELETING_START });
   axiosWithAuth()
     .delete(`/friends/${friend.id}`, friend)
     .then(res => {
-      console.log(res)
       dispatch({ type: DELETE_SUCCESS, payload: res.data })
     })
     .catch(err => {

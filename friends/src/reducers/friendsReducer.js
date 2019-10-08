@@ -59,7 +59,8 @@ export const friendsReducer = (state = initialState, action) => {
       return {
         ...state,
         error: '',
-        isFetching: false
+        isFetching: false,
+        friends: action.payload
       }
     case actionTypes.DELETING_START:
       return {
