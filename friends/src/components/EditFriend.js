@@ -11,10 +11,6 @@ const EditFriend = (props) => {
     id: id
   })
 
-  const check = () => {
-    console.log(props)
-  }
-
   const handleChange = e => {
     setEditFriend({ ...editFriend, [e.target.name]: e.target.value });
   };
@@ -27,7 +23,6 @@ const EditFriend = (props) => {
   
   return (
     <div>
-      <button onClick={check}>Check?</button>
       <form onSubmit={onEditFriend} className="login-form">
         <input 
           type="text"

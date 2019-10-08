@@ -16,13 +16,8 @@ const FriendsList = props => {
     props.deleteFriend(friend)
   }
 
-  const check = () => {
-    console.log(props)
-  }
-
   return (
     <div>
-      <button onClick={check}>Check?</button>
       { 
         display 
         ? <AddFriend display={display}/>
