@@ -1,38 +1,6 @@
-import {
-  FRIENDS_START,
-  FRIENDS_SUCCESS,
-  FRIENDS_FAILURE
-} from '../actions';
+import { combineReducers } from 'redux';
+import { friendsReducer } from './friendsReducer';
 
-const initialState = {
-  friends: [],
-  display: false,
-  error: '',
-  isFetching: false
-}
-
-export const rootReducer = (state = initialState, action) => {
-  switch(action.type) {
-    case FRIENDS_START:
-      return {
-        ...state,
-        error: '',
-        isFetching: true
-      }
-    case FRIENDS_SUCCESS:
-      return {
-        ...state,
-        error: '',
-        isFetching: false,
-        friends: action.payload
-      }
-    case FRIENDS_FAILURE:
-      return {
-        ...state,
-        error: action.payload,
-        isFetching: false
-      }
-    default:
-      return state
-  }
-}
+export default combineReducers({
+  friendsReducer,
+})
